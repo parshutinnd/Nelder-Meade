@@ -12,7 +12,7 @@ namespace WpfApp2
         {
             InitializeComponent();
 
-            Controller AlgorithmController = new Controller();
+            ViewModel AlgorithmController = new ViewModel();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

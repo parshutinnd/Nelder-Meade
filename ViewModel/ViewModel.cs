@@ -4,9 +4,9 @@ using System.Windows;
 
 namespace OptimizationMethods.ViewModel
 {
-    public class Controller : INotifyPropertyChanged
+    public class ViewModel : INotifyPropertyChanged
     {
-        public Controller() 
+        public ViewModel() 
         {
 
         }
