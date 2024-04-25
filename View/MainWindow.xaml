@@ -6,8 +6,68 @@
         xmlns:local="clr-namespace:WpfApp2"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Border Padding="5,5,5,5">
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Center" Height="90" Margin="0,167,0,0" VerticalAlignment="Top" Width="264" Click="Button_Click"/>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto">
+            </RowDefinition>
+            <RowDefinition>
+            </RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition>
+            </ColumnDefinition>
+            <ColumnDefinition Width="Auto">
+            </ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition>
+                </RowDefinition>
+                <RowDefinition>
+                </RowDefinition>
+                <RowDefinition>
+                </RowDefinition>
+                <RowDefinition>
+                </RowDefinition>
+                <RowDefinition>
+                </RowDefinition>
+                <RowDefinition>
+                </RowDefinition>
+                <RowDefinition>
+                </RowDefinition>
+                <RowDefinition>
+                </RowDefinition>
+                <RowDefinition>
+                </RowDefinition>
+                <RowDefinition>
+                </RowDefinition>
+                <RowDefinition>
+                </RowDefinition>
+                <RowDefinition>
+                </RowDefinition>
+                <RowDefinition>
+                </RowDefinition>
+                <RowDefinition>
+                </RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBox Grid.Row="1" Name="Alpha" PreviewTextInput="FloatInput" Width="100"/>
+            <Label Grid.Row="0" Content="Альфа"/>
+            <TextBox Grid.Row="3" Name="Beta" PreviewTextInput="FloatInput" Width="100"/>
+            <Label Grid.Row="2" Content="Бэта"/>
+            <TextBox Grid.Row="5" Name="Gamma" PreviewTextInput="FloatInput" Width="100"/>
+            <Label Grid.Row="4" Content="Гамма"/>
+            <TextBox Grid.Row="7" Name="l" PreviewTextInput="FloatInput" Width="100"/>
+            <Label Grid.Row="6" Content="Отклонение"/>
+            <TextBox Grid.Row="9" Name="eps" PreviewTextInput="FloatInput" Width="100"/>
+            <Label Grid.Row="8" Content="Эпсилон"/>
+            <TextBox Grid.Row="11" Name="Precision" PreviewTextInput="FloatInput" Width="100"/>
+            <Label Grid.Row="10" Content="Округление"/>
+            <CheckBox Grid.Row="12" Content="Перестраивать симплекс?" />
+            <Button Grid.Row="13" Content="Запустить алгоритм"/>
+        </Grid>
+        
     </Grid>
+    </Border>
 </Window>
