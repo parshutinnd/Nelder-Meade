@@ -1,13 +1,21 @@
-﻿using System.ComponentModel;
+﻿using OptimizationMethods.Model;
+using OptimizationMethods.models;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows;
+using System.Threading.Tasks;
 
 namespace OptimizationMethods.ViewModel
 {
-    public class ViewModel : INotifyPropertyChanged
+    public class ViewModel
     {
+        public void Listerning()
+        {
+
+        }
         public ViewModel() 
         {
+            NMconfig startConf = new NMconfig();
+            NelderMeade algorithm = new NelderMeade(startConf);
 
         }
 

@@ -2,6 +2,7 @@
 using OptimizationMethods.ViewModel;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
+using System.Threading;
 
 namespace WpfApp2
 {
@@ -15,8 +16,9 @@ namespace WpfApp2
         public MainWindow()
         {
             InitializeComponent();
-
-            AlgorithmController = new ViewModel();
+            ViewModel AlgorithmViewModel = new ViewModel();
+            new Thread(AlgorithmViewModel.Listerning).Start();
+            AlgorithmViewModel.Listerning();
         }
         private void IntInput(object sender, TextCompositionEventArgs e)
         {
@@ -27,14 +29,15 @@ namespace WpfApp2
         {
             /* check for float */
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
 
         private void TextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

@@ -12,7 +12,7 @@ namespace OptimizationMethods.Model
     {
         public int n; //размерность
         public Expression exp; //функция
-        public double alpha = 1; //коэффициент отражения
+        public double alpha; //коэффициент отражения
         public double beta = 2;  //коэффициент растяжения
         public double gamma = 0.5; //коэффициент сжатия
         public double l = 1; //начальное отклонение
@@ -20,6 +20,16 @@ namespace OptimizationMethods.Model
         bool isReady = false;
         public Point[] startSimplex;
 
+        public NMconfig()
+        {
+            this.n = 0;
+            this.exp = null;
+            this.epsilon = 0;
+            this.alpha = 1;
+            this.beta = 1;
+            this.gamma = 1;
+            this.isReady = false;
+        }
         public NMconfig(int n, Expression exp, double epsilon, double alpha, double beta, double gamma)
         {
             this.n = n;
