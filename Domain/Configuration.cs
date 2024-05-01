@@ -80,6 +80,14 @@ namespace OptimizationMethods
                     GlobalComprerssion(newSimplex, nmConfig.exp);
                     break;
             }
+            Array.Sort(newSimplex, new ValueIncreasingComparer());
+            /*for (int i = 0; i < newSimplex.Length; i++)
+            {
+                Console.WriteLine($"simplex[{i}] = ");
+                for (int j = 0; j < nmConfig.n; j++)
+                    Console.WriteLine(newSimplex[i].coords[j]);
+            }*/
+            nmConfig.startSimplex = newSimplex;
             return CreateConfiguration(nmConfig);
         }
         static Point Centre(Point[] simplex)
