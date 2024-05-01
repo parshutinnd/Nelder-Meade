@@ -77,7 +77,7 @@ namespace OptimizationMethods
 
         public NMconfig()
         { 
-            this.function = "X1+X2";
+            this.function = "X1^2+X2^2";
             this.ids = new string[] { "X1", "X2" };
             this.n = ids.Length;
             this.exp = new Expression(function,ids,null);

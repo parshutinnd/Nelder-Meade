@@ -21,12 +21,14 @@ namespace OptimizationMethods
             configurations.Add(Config);
 
             int i = 0;
-            while (StopCondition(Config,nmConfig) && i < 100)
+            while (StopCondition(Config,nmConfig))
             {
-                configurations.Add(Configuration.NextConfiguration(Config, nmConfig));
+                Console.Write($"{i}) {Dispersion(Config.simplex)}");
+                Config = Configuration.NextConfiguration(Config, nmConfig);
+                configurations.Add(Config);
                 i++;
             }
-
+            //Console.ReadLine();
             return configurations;
         }
         bool StopCondition(Configuration conf, NMconfig nmConfig)
