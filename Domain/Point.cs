@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FunctionParser;
 
-namespace OptimizationMethods.Domain
+namespace OptimizationMethods
 {
     class ValueIncreasingComparer : IComparer<Point>
     {

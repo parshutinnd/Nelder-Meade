@@ -1,45 +1,96 @@
 ﻿using FunctionParser;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OptimizationMethods.Domain;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace OptimizationMethods.Model
+namespace OptimizationMethods
 {
-    public class NMconfig
+    public class NMconfig : INotifyPropertyChanged
     {
         public int n; //размерность
+        public string function; // строковое представление
+        public string[] ids; // examample: X1 X2 X3
         public Expression exp; //функция
         public double alpha; //коэффициент отражения
-        public double beta = 2;  //коэффициент растяжения
-        public double gamma = 0.5; //коэффициент сжатия
-        public double l = 1; //начальное отклонение
+        public double beta;  //коэффициент растяжения
+        public double gamma; //коэффициент сжатия
+        public double l; //начальное отклонение
         public double epsilon; //эпсилон
-        bool isReady = false;
+        public bool isReady;
         public Point[] startSimplex;
 
+        public string Function //функция
+        {
+            get { return function; }
+            set
+            {
+                function = value;
+                exp = new Expression(function,ids,null) ;
+                OnPropertyChanged("func");
+            }
+        }
+        public double Alpha //коэффициент отражения
+        {
+            get { return alpha; }
+            set
+            {
+                alpha = value;
+                OnPropertyChanged("alpha");
+            }
+        }
+        public double Beta  //коэффициент растяжения
+        {
+            get { return beta; }
+            set
+            {
+                beta = value;
+                OnPropertyChanged("beta");
+            }
+        }
+        public double Gamma //коэффициент сжатия
+        {
+            get { return gamma; }
+            set
+            {
+                gamma = value;
+                OnPropertyChanged("gamma");
+            }
+        }
+        public double L //начальное отклонение
+        {
+            get { return l; }
+            set
+            {
+                l = value;
+                OnPropertyChanged("l");
+            }
+        }
+        public double Epsilon //эпсилон
+        {
+            get { return epsilon; }
+            set
+            {
+                epsilon = value;
+                OnPropertyChanged("epsilon");
+            }
+        }
+
         public NMconfig()
-        {
-            this.n = 0;
-            this.exp = null;
-            this.epsilon = 0;
+        { 
+            this.function = "X1+X2";
+            this.ids = new string[] { "X1", "X2" };
+            this.n = ids.Length;
+            this.exp = new Expression(function,ids,null);
+            this.epsilon = 0.01;
             this.alpha = 1;
-            this.beta = 1;
-            this.gamma = 1;
+            this.beta = 2;
+            this.gamma = 0.5;
             this.isReady = false;
+            this.l = 1;
+            Point start = new Point(new double[] {5,5});
+            this.startSimplex = GenerateSimplex(start);
         }
-        public NMconfig(int n, Expression exp, double epsilon, double alpha, double beta, double gamma)
-        {
-            this.n = n;
-            this.exp = exp;
-            this.epsilon = epsilon;
-            this.alpha = alpha;
-            this.beta = beta;
-            this.gamma = gamma;
-            this.isReady = IsReadyToStart();
-        }
+
         public void GetByPoint(Point start) //По начальной точке
         {
             this.startSimplex = GenerateSimplex(start);
@@ -89,6 +140,13 @@ namespace OptimizationMethods.Model
                 for (int j = i + 1; j < n; j++)
                     if (!Point.LinearIndependence(vectors[i], vectors[j])) return false;
             return true;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

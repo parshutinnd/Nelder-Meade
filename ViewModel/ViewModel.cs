@@ -1,26 +1,52 @@
-﻿using OptimizationMethods.Model;
-using OptimizationMethods.models;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
+using System.Windows.Input;
 
-namespace OptimizationMethods.ViewModel
+namespace OptimizationMethods
 {
-    public class ViewModel
+    public class ViewModel : INotifyPropertyChanged
     {
-        public void Listerning()
-        {
 
+        NMconfig? newConfig = new NMconfig();
+
+        public NMconfig? NewConfig 
+        { 
+            get { return newConfig; }
+            set
+            {
+                newConfig = value;
+                OnPropertyChanged("NewConfig");
+            }
         }
-        public ViewModel() 
-        {
-            NMconfig startConf = new NMconfig();
-            NelderMeade algorithm = new NelderMeade(startConf);
 
+        private ICommand? _start;
+        public ICommand StartCommand
+        {
+            get
+            {
+                if (_start == null)
+                {
+                    _start = new RelayCommand(
+                        p => this.CanRun(),
+                        p => this.RunNelderMeade());
+                }
+                return _start;
+            }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        public bool CanRun()
+        {
+            return true;
+        }
+
+        public void RunNelderMeade()
+        {
+            NelderMeade nelderMeade = new NelderMeade(NewConfig);
+            var results = nelderMeade.Run(NewConfig);
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
