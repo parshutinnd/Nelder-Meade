@@ -6,7 +6,7 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:OptimizationMethods"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" MinWidth="450" MinHeight="375">
     <Window.DataContext>
         <local:ViewModel/>
     </Window.DataContext>
@@ -27,51 +27,50 @@
             <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding NewConfig.Function, UpdateSourceTrigger=PropertyChanged}"/>
             <Grid Grid.Row="1" Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition>
+                    <RowDefinition Height="20">
                     </RowDefinition>
                     <RowDefinition>
                     </RowDefinition>
-                    <RowDefinition>
+                    <RowDefinition Height="25">
                     </RowDefinition>
                     <RowDefinition>
                     </RowDefinition>
-                    <RowDefinition>
+                    <RowDefinition Height="25">
                     </RowDefinition>
                     <RowDefinition>
                     </RowDefinition>
-                    <RowDefinition>
+                    <RowDefinition Height="25">
                     </RowDefinition>
                     <RowDefinition>
                     </RowDefinition>
-                    <RowDefinition>
+                    <RowDefinition Height="25">
                     </RowDefinition>
                     <RowDefinition>
                     </RowDefinition>
-                    <RowDefinition>
+                    <RowDefinition Height="25">
                     </RowDefinition>
                     <RowDefinition>
                     </RowDefinition>
-                    <RowDefinition>
+                    <RowDefinition Height="20">
                     </RowDefinition>
-                    <RowDefinition>
+                    <RowDefinition Height="30">
                     </RowDefinition>
                 </Grid.RowDefinitions >
-                <TextBox Name="Alpha" PreviewTextInput="FloatInput" Width="100" Height="29" Margin="31,29,32,0" Grid.RowSpan="2" VerticalAlignment="Top" Text="{Binding NewConfig.Alpha}"/>
-                <Label Grid.Row="0" Content="Альфа"/>
-                <TextBox Grid.Row="2" Name="Beta" PreviewTextInput="FloatInput" Text="{Binding NewConfig.Beta, UpdateSourceTrigger=PropertyChanged}" Margin="32,29,31,0" Grid.RowSpan="2"/>
-                <Label Grid.Row="2" Content="Бэта"/>
-                <TextBox Grid.Row="5" Name="Gamma" PreviewTextInput="FloatInput" Width="100" Text="{Binding NewConfig.Gamma, UpdateSourceTrigger=PropertyChanged}"/>
-                <Label Grid.Row="4" Content="Гамма"/>
-                <TextBox Grid.Row="7" Name="l" PreviewTextInput="FloatInput" Width="100" Text="{Binding NewConfig.L, UpdateSourceTrigger=PropertyChanged}"/>
-                <Label Grid.Row="6" Content="Отклонение"/>
-                <TextBox Grid.Row="9" Name="eps" PreviewTextInput="FloatInput" Width="100" Text="{Binding NewConfig.Epsilon, UpdateSourceTrigger=PropertyChanged}"/>
-                <Label Grid.Row="8" Content="Эпсилон"/>
-                <TextBox Grid.Row="11" Name="Precision" PreviewTextInput="FloatInput" Width="100" />
-                <Label Grid.Row="10" Content="Округление"/>
+                <TextBox Grid.Row="1" Name="Alpha"  PreviewTextInput="DoublePreviewInput" Width="100" Text="{Binding NewConfig.Alpha, UpdateSourceTrigger=Default}"/>
+                <Label Grid.Row="0" Content="Альфа" Padding="0,0,0,0"/>
+                <TextBox Grid.Row="3" Name="Beta" PreviewTextInput="DoublePreviewInput" Width="100" Text="{Binding NewConfig.Beta, UpdateSourceTrigger=Default}"/>
+                <Label Grid.Row="2" Content="Бэта" Padding="0,5,0,0"/>
+                <TextBox Grid.Row="5" Name="Gamma" PreviewTextInput="DoublePreviewInput" Width="100" Text="{Binding NewConfig.Gamma, UpdateSourceTrigger=Default}"/>
+                <Label Grid.Row="4" Content="Гамма" Padding="0,5,0,0"/>
+                <TextBox Grid.Row="7" Name="l" PreviewTextInput="DoublePreviewInput" Width="100" Text="{Binding NewConfig.L, UpdateSourceTrigger=Default}"/>
+                <Label Grid.Row="6" Content="Отклонение" Padding="0,5,0,0"/>
+                <TextBox Grid.Row="9" Name="eps" PreviewTextInput="DoublePreviewInput" Width="100" Text="{Binding NewConfig.Epsilon, UpdateSourceTrigger=Default}"/>
+                <Label Grid.Row="8" Content="Эпсилон" Padding="0,5,0,0"/>
+                <TextBox Grid.Row="11" Name="Precision" PreviewTextInput="DoublePreviewInput" Width="100" />
+                <Label Grid.Row="10" Content="Округление" Padding="0,5,0,0"/>
                 <CheckBox Grid.Row="12" Content="Перестраивать симплекс?" />
-                <Button Grid.Row="12" Content="Запустить алгоритм" Height="29" Grid.RowSpan="2" VerticalAlignment="Bottom" Command="{Binding StartCommand, Mode=OneWay}"></Button>
+                <Button Grid.Row="13" Content="Запустить алгоритм" Command="{Binding StartCommand, Mode=OneWay}"></Button>
             </Grid>
-
         </Grid>
     </Border>
 </Window>
