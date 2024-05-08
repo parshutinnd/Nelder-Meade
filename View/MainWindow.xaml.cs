@@ -3,6 +3,7 @@ using OptimizationMethods;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
 using System.Threading;
+using System;
 
 namespace WpfApp2
 {
@@ -17,14 +18,10 @@ namespace WpfApp2
             InitializeComponent();
             DataContext = new ViewModel();
         }
-        private void IntInput(object sender, TextCompositionEventArgs e)
+        private void DoublePreviewInput(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new Regex(@"[-+]?[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
-        }
-        private void FloatInput(object sender, TextCompositionEventArgs e)
-        {
-            /* check for float */
+            string permitted = "0123456789+-.";
+            e.Handled = !permitted.Contains(e.Text[0]);
         }
     }
 }
