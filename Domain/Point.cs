@@ -27,6 +27,17 @@ namespace OptimizationMethods
         public double[] coords;
         public double value = double.NaN;
 
+        public Point(string str)
+        {
+            string[] arrStr = str.Split(';').Select(str => str.Trim()).ToArray();
+            coords = new double[arrStr.Length];
+            for(int i = 0; i < arrStr.Length; i++)
+            {
+                coords[i] = double.Parse(arrStr[i]);
+            }
+            dimension = coords.Length;
+        }
+
         public Point(double[] arr)
         {
             coords = (double[])arr.Clone();
@@ -118,4 +129,5 @@ namespace OptimizationMethods
             return newPoints;
         }
     }
+
 }

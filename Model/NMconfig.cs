@@ -8,8 +8,8 @@ namespace OptimizationMethods
     public class NMconfig : INotifyPropertyChanged
     {
         public int n; //размерность
-        public string function; // строковое представление
         public string[] ids; // examample: X1 X2 X3
+        public string function; //строковое представление
         public Expression exp; //функция
         public double alpha; //коэффициент отражения
         public double beta;  //коэффициент растяжения
@@ -17,6 +17,7 @@ namespace OptimizationMethods
         public double l; //начальное отклонение
         public double epsilon; //эпсилон
         public bool isReady;
+        public string startPoint; //строковое представление
         public Point[] startSimplex;
 
         public string Function //функция
@@ -26,7 +27,7 @@ namespace OptimizationMethods
             {
                 function = value;
                 exp = new Expression(function,ids,null) ;
-                OnPropertyChanged("func");
+                OnPropertyChanged("function");
             }
         }
         public double Alpha //коэффициент отражения
@@ -75,11 +76,22 @@ namespace OptimizationMethods
             }
         }
 
+        public string Start
+        {
+            get { return startPoint; }
+            set 
+            {
+                startPoint = value;
+                startSimplex = GetByPoint(new(startPoint));
+                OnPropertyChanged("startPoint");
+            }
+        }
+
         public NMconfig()
         { 
-            this.function = "X1^2+X2^2";
             this.ids = new string[] { "X1", "X2" };
             this.n = ids.Length;
+            this.function = "X1^2+X2^2";
             this.exp = new Expression(function,ids,null);
             this.epsilon = 0.01;
             this.alpha = 1;
@@ -87,18 +99,13 @@ namespace OptimizationMethods
             this.gamma = 0.5;
             this.isReady = false;
             this.l = 1;
-            Point start = new Point(new double[] {5,5});
-            this.startSimplex = GenerateSimplex(start);
+            this.startPoint = "5; 5";
+            this.startSimplex = GetByPoint(new(startPoint));
         }
 
-        public void GetByPoint(Point start) //По начальной точке
+        public Point[] GetByPoint(Point start) //По начальной точке
         {
-            this.startSimplex = GenerateSimplex(start);
-        }
-
-        public void GetBySimplex(Point[] startSimplex) //По начальному симплексу
-        {
-            this.startSimplex = Point.Clone(startSimplex);
+            return GenerateSimplex(start);
         }
 
         Point[] GenerateSimplex(Point startPoint)

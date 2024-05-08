@@ -16,7 +16,6 @@ namespace WpfApp2
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new ViewModel();
         }
         private void DoublePreviewInput(object sender, TextCompositionEventArgs e)
         {

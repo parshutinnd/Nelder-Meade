@@ -62,7 +62,7 @@
                 <Label Grid.Row="2" Content="Бэта" Padding="0,5,0,0"/>
                 <TextBox Grid.Row="5" Name="Gamma" PreviewTextInput="DoublePreviewInput" Width="100" Text="{Binding NewConfig.Gamma, UpdateSourceTrigger=Default}"/>
                 <Label Grid.Row="4" Content="Гамма" Padding="0,5,0,0"/>
-                <TextBox Grid.Row="7" Name="l" PreviewTextInput="DoublePreviewInput" Width="100" Text="{Binding NewConfig.L, UpdateSourceTrigger=Default}"/>
+                <TextBox Grid.Row="7" Name="l" PreviewTextInput="DoublePreviewInput" Width="100" Text="{Binding NewConfig.L,UpdateSourceTrigger=Default}"/>
                 <Label Grid.Row="6" Content="Отклонение" Padding="0,5,0,0"/>
                 <TextBox Grid.Row="9" Name="eps" PreviewTextInput="DoublePreviewInput" Width="100" Text="{Binding NewConfig.Epsilon, UpdateSourceTrigger=Default}"/>
                 <Label Grid.Row="8" Content="Эпсилон" Padding="0,5,0,0"/>
@@ -71,6 +71,11 @@
                 <CheckBox Grid.Row="12" Content="Перестраивать симплекс?" />
                 <Button Grid.Row="13" Content="Запустить алгоритм" Command="{Binding StartCommand, Mode=OneWay}"></Button>
             </Grid>
+            <Label Content="start from point:" HorizontalAlignment="Left" Height="24" Margin="10,20,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100"/>
+            <TextBox HorizontalAlignment="Left" Margin="115,20,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding NewConfig.Start, UpdateSourceTrigger=Default}" VerticalAlignment="Top" Width="120"/>
+            
+                <Image HorizontalAlignment="Left" Height="300" Margin="10,60,0,0" Grid.Row="1" VerticalAlignment="Top" Width="600" Source="{Binding Result}"/>
+            
         </Grid>
     </Border>
 </Window>

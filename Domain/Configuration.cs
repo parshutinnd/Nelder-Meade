@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace OptimizationMethods
 {
-    enum Actions
+    public enum Actions
     {
         Reflection,       //отражение
         Stretching,       //растяжение
         Compression,      //сжатие
         GlobalCompression //глобальное сжатие
     }
-    class Configuration //сюда записываем промежуточные результаты работы
+    public class Configuration //сюда записываем промежуточные результаты работы
     {
         public readonly Point[] simplex; //симплекс
         public readonly Actions action;  //следущее действие

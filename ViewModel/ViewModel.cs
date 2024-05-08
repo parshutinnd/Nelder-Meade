@@ -1,6 +1,9 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using System.Collections.Generic;
+using System.Windows.Controls;
+using WpfApp2;
 
 namespace OptimizationMethods
 {
@@ -8,7 +11,7 @@ namespace OptimizationMethods
     {
 
         NMconfig? newConfig = new NMconfig();
-
+        List<Configuration> result = new List<Configuration>();
         public NMconfig? NewConfig 
         { 
             get { return newConfig; }
@@ -16,6 +19,16 @@ namespace OptimizationMethods
             {
                 newConfig = value;
                 OnPropertyChanged("NewConfig");
+            }
+        }
+
+        public List<Configuration>? Result
+        {
+            get { return result; }
+            set
+            {
+                result = value;
+                OnPropertyChanged("Result");
             }
         }
 
@@ -42,7 +55,7 @@ namespace OptimizationMethods
         public void RunNelderMeade()
         {
             NelderMeade nelderMeade = new NelderMeade(NewConfig);
-            var results = nelderMeade.Run(NewConfig);
+            Result = nelderMeade.Run(NewConfig);
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
