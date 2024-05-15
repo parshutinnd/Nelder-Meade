@@ -72,10 +72,13 @@
                 <Button Grid.Row="13" Content="Запустить алгоритм" Command="{Binding StartCommand, Mode=OneWay}"></Button>
             </Grid>
             <Label Content="start from point:" HorizontalAlignment="Left" Height="24" Margin="10,20,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100"/>
+            <Canvas Grid.Row="1" Grid.Column="0">
+                <Polyline Points="{Binding ResultString, UpdateSourceTrigger=PropertyChanged}" Stroke="Black" StrokeThickness="4"/>
+            </Canvas>
             <TextBox HorizontalAlignment="Left" Margin="115,20,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding NewConfig.Start, UpdateSourceTrigger=Default}" VerticalAlignment="Top" Width="120"/>
-            
-                <Image HorizontalAlignment="Left" Height="300" Margin="10,60,0,0" Grid.Row="1" VerticalAlignment="Top" Width="600" Source="{Binding Result}"/>
-            
+            <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding ResultString, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Content="Left" HorizontalAlignment="Left" Margin="184,380,0,0" Grid.Row="1" VerticalAlignment="Top" Command="{Binding Left, Mode=OneWay}"/>
+            <Button Content="Right" HorizontalAlignment="Left" Margin="420,380,0,0" Grid.Row="1" VerticalAlignment="Top" Command="{Binding Right, Mode=OneWay}"/>
         </Grid>
     </Border>
 </Window>
