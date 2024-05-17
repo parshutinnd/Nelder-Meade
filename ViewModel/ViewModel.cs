@@ -16,6 +16,25 @@ namespace OptimizationMethods
         string resultString = "";
         int resultIndex = -1;
 
+        public string ResultRepresentation
+        {
+            get
+            {
+                if (ResultIndex == -1) return "Not assigned";
+                string output = "";
+                for (int i = 0; i < result[ResultIndex].simplex.Length; i++)
+                {
+                    output += "[ ";
+                    for (int j = 0; j < result[ResultIndex].simplex[i].coords.Length; j++)
+                    {
+                        output += result[ResultIndex].simplex[i].coords[j] + " ";
+                    }
+                    output += "] ";
+                }
+                return output;
+            }
+        }
+
         public NMconfig? NewConfig 
         { 
             get { return newConfig; }
@@ -44,6 +63,7 @@ namespace OptimizationMethods
                 if (value == null) resultString = string.Empty;
                 else resultString = value;
                 OnPropertyChanged("ResultString");
+                OnPropertyChanged("ResultRepresentation");
             }
         }
 
@@ -55,19 +75,7 @@ namespace OptimizationMethods
                 if (value < 0) return;
                 if (value >= result.Count) return;
                 resultIndex = value;
-                if (result[value].simplex[0].coords.Length != 2)
-                {
-                    resultString = string.Empty;
-                    return;
-                }
-                string result_string = "";
-                for (int i = 0; i < result[value].simplex.Length; i++)
-                {
-                    if (i != 0) result_string += " ";
-                    result_string += ((int)result[value].simplex[i].coords[0] * 10).ToString() + ",";
-                    result_string += ((int)result[value].simplex[i].coords[1] * 10).ToString();
-                }
-                ResultString = result_string;
+                ResultString = PlotView.StringGenerator(result[value]);
                 OnPropertyChanged("ResultIndex");
             }
         }
@@ -87,6 +95,7 @@ namespace OptimizationMethods
                 return left;
             }
         }
+
         ICommand? right;
         public ICommand Right
         {
@@ -100,6 +109,24 @@ namespace OptimizationMethods
                 }
                 ResultIndex--;
                 return right;
+            }
+        }
+
+        ICommand? replot;
+        public ICommand Replot
+        {
+            get
+            {
+                if (replot == null)
+                {
+                    replot = new RelayCommand(
+                        p => this.CanRun(),
+                        p => { ResultString = PlotView.StringGenerator(result[ResultIndex]);
+                            OnPropertyChanged("ResultString");
+                            OnPropertyChanged("ResultRepresentation");
+                        });
+                }
+                return replot;
             }
         }
 

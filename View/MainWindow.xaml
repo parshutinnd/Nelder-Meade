@@ -24,7 +24,25 @@
                 <ColumnDefinition Width="Auto">
                 </ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding NewConfig.Function, UpdateSourceTrigger=PropertyChanged}"/>
+            <Grid Grid.Row="1" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20">
+                    </RowDefinition>
+                    <RowDefinition >
+                    </RowDefinition>
+                    <RowDefinition Height="20">
+                    </RowDefinition>
+                </Grid.RowDefinitions>
+                <Canvas Background="Azure"  Name="Canvas" Grid.Row="1" SizeChanged="Canvas_SizeChanged" PreviewTouchMove="Canvas_PreviewTouchMove" PreviewMouseMove="Canvas_PreviewMouseMove" MouseMove="Canvas_MouseMove" MouseWheel="Canvas_MouseWheel" KeyDown="Canvas_KeyDown" MouseLeftButtonDown="Canvas_MouseLeftButtonDown" MouseLeftButtonUp="Canvas_MouseLeftButtonUp" PreviewMouseDown="Canvas_PreviewMouseDown">
+                    <Polyline Points="{Binding ResultString, UpdateSourceTrigger=PropertyChanged}" Stroke="Black" StrokeThickness="4"/>
+                </Canvas>
+                <TextBox Grid.Row="0" Text="{Binding ResultRepresentation, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                <Button Grid.Row="2" Content="Left" HorizontalAlignment="Left" Command="{Binding Left, Mode=OneWay}"/>
+                <Button Name="Replot" Grid.Row="2" Content="Replot" HorizontalAlignment="Center" Command="{Binding Replot, Mode=OneWay}"/>
+                <Button Grid.Row="2" Content="Right" HorizontalAlignment="Right" Command="{Binding Right, Mode=OneWay}"/>
+            </Grid>
+            <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding NewConfig.Function, UpdateSourceTrigger=PropertyChanged}" AutomationProperties.HelpText="Start point" />
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding NewConfig.Start, UpdateSourceTrigger=Default}"/>
             <Grid Grid.Row="1" Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20">
@@ -71,14 +89,6 @@
                 <CheckBox Grid.Row="12" Content="Перестраивать симплекс?" />
                 <Button Grid.Row="13" Content="Запустить алгоритм" Command="{Binding StartCommand, Mode=OneWay}"></Button>
             </Grid>
-            <Label Content="start from point:" HorizontalAlignment="Left" Height="24" Margin="10,20,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100"/>
-            <Canvas Grid.Row="1" Grid.Column="0">
-                <Polyline Points="{Binding ResultString, UpdateSourceTrigger=PropertyChanged}" Stroke="Black" StrokeThickness="4"/>
-            </Canvas>
-            <TextBox HorizontalAlignment="Left" Margin="115,20,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding NewConfig.Start, UpdateSourceTrigger=Default}" VerticalAlignment="Top" Width="120"/>
-            <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding ResultString, UpdateSourceTrigger=PropertyChanged}"/>
-            <Button Content="Left" HorizontalAlignment="Left" Margin="184,380,0,0" Grid.Row="1" VerticalAlignment="Top" Command="{Binding Left, Mode=OneWay}"/>
-            <Button Content="Right" HorizontalAlignment="Left" Margin="420,380,0,0" Grid.Row="1" VerticalAlignment="Top" Command="{Binding Right, Mode=OneWay}"/>
         </Grid>
     </Border>
 </Window>
