@@ -40,9 +40,6 @@
                     <!-- Ось X -->
                     <Line X1="0" Y1="0" X2="600" Y2="0" Canvas.Left="0" Canvas.Top="150" Stroke="Black"/>
 
-                    <Canvas x:Name="yAxis" Background="LightGray" Height="300" Canvas.Left="300" Canvas.Top="0"/>
-                    <Canvas x:Name="xAxis" Background="LightGray" Width="600" Canvas.Left="0" Canvas.Top="150"/>
-
                 </Canvas>
                 <TextBox Grid.Row="0" Text="{Binding ResultRepresentation, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                 <Button Grid.Row="2" Content="Left" HorizontalAlignment="Left" Command="{Binding Left, Mode=OneWay}"/>

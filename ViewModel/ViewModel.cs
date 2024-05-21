@@ -121,7 +121,7 @@ namespace OptimizationMethods
                 {
                     replot = new RelayCommand(
                         p => true,
-                        p => { ResultString = PlotView.StringGenerator(result[ResultIndex]);
+                        p => { if (resultIndex < result.Count && resultIndex != -1) ResultString = PlotView.StringGenerator(result[ResultIndex]);
                             OnPropertyChanged("ResultString");
                             OnPropertyChanged("ResultRepresentation");
                         });
