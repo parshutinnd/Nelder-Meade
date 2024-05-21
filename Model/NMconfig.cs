@@ -97,10 +97,9 @@ namespace OptimizationMethods
             this.alpha = 1;
             this.beta = 2;
             this.gamma = 0.5;
-            this.isReady = false;
             this.l = 1;
             this.startPoint = "5; 5";
-            this.startSimplex = GetByPoint(new(startPoint));
+            this.startSimplex = GetByPoint(new(startPoint)); 
         }
 
         public Point[] GetByPoint(Point start) //По начальной точке
@@ -129,12 +128,12 @@ namespace OptimizationMethods
             if (n + 1 != startSimplex.Length) return false;
             //условие 2 (Размерности точек совпадают)
             for (int i = 0; i < startSimplex.Length; i++)
-                if ((startSimplex[i] != null) || (n != startSimplex[i].dimension))
+                if ((startSimplex[i] == null) || (n != startSimplex[i].dimension))
                     return false;
             //условие 3 (Корректные параметры алгоритма)
             if ((alpha <= 0) || (beta <= 1) || (gamma <= 0) || (gamma >= 1) || (epsilon <= 0)) return false;
             //условие 4 (Начальный симплекс линейно независим)
-            if (!IsConvexHull()) isReady = false;
+            if (!IsConvexHull()) return false;
             return true;
         }
 

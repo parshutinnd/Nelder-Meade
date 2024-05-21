@@ -88,7 +88,7 @@ namespace OptimizationMethods
                 if (left == null)
                 {
                     left = new RelayCommand(
-                        p => this.CanRun(),
+                        p => true,
                         p => { ResultIndex--; });
                 }
                 ResultIndex--;
@@ -104,7 +104,7 @@ namespace OptimizationMethods
                 if (right == null)
                 {
                     right = new RelayCommand(
-                        p => this.CanRun(),
+                        p => true,
                         p => { ResultIndex++; });
                 }
                 ResultIndex--;
@@ -120,7 +120,7 @@ namespace OptimizationMethods
                 if (replot == null)
                 {
                     replot = new RelayCommand(
-                        p => this.CanRun(),
+                        p => true,
                         p => { ResultString = PlotView.StringGenerator(result[ResultIndex]);
                             OnPropertyChanged("ResultString");
                             OnPropertyChanged("ResultRepresentation");
@@ -147,7 +147,7 @@ namespace OptimizationMethods
 
         public bool CanRun()
         {
-            return true;
+            return NewConfig.IsReadyToStart() && result.Count == 0;
         }
 
         public void RunNelderMeade()
