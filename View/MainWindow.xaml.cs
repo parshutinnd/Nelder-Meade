@@ -10,6 +10,10 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Windows.Data;
 using System.Windows.Controls.Primitives;
+using System.Windows.Controls;
+using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
+using System.Drawing;
 
 namespace WpfApp2
 {
@@ -23,6 +27,7 @@ namespace WpfApp2
         public static double scalefactor = 10;
         public static double x = 0;
         public static double y = 0;
+
         public static string StringGenerator(Configuration configuration)
         {
             if (configuration.simplex[0].coords.Length != 2)
@@ -57,6 +62,96 @@ namespace WpfApp2
         {
             InitializeComponent();
         }
+        public void RedrawCoords()
+        {
+            while (canvas.Children.Count > 1)
+            {
+                canvas.Children.RemoveAt(1);
+            }
+
+            double leftX = PlotView.x / PlotView.scalefactor;
+            double leftY = PlotView.y / PlotView.scalefactor;
+            double rightX = PlotView.width / PlotView.scalefactor + leftX;
+            double rightY = PlotView.height / PlotView.scalefactor + leftY;
+            
+            double diffX = rightX - leftX;
+            double diffY = rightY - leftY;
+
+            if (diffX == 0 || diffY == 0) return;
+            double initialTickDiff = 1000;
+            while (diffY < initialTickDiff * 5) 
+            {
+                initialTickDiff /= 2;
+                if (diffY >= initialTickDiff * 5) break;
+                initialTickDiff /= 5;
+            }
+            for (double xi = leftX - leftX % initialTickDiff; xi <= rightX; xi+=initialTickDiff)
+            {
+                Line line = new Line()
+                {
+                    Stroke = Brushes.Gray,
+                    X1 = - PlotView.x + xi * PlotView.scalefactor,
+                    X2 = - PlotView.x + xi * PlotView.scalefactor,
+                    Y1 = 0,
+                    Y2 = PlotView.height
+                };
+                canvas.Children.Add(line);
+
+                TextBlock textBlock = new TextBlock()
+                {
+                    Text = xi.ToString(),
+                    Foreground = new SolidColorBrush(Colors.Red),
+                    Background = new SolidColorBrush(Colors.Black)
+                };
+                Canvas.SetLeft(textBlock, line.X1);
+                Canvas.SetTop(textBlock, 0);
+                canvas.Children.Add(textBlock);
+            }
+            for (double yi = leftY - leftY % initialTickDiff; yi <= rightY; yi += initialTickDiff)
+            {
+                Line line = new Line()
+                {
+                    Stroke = Brushes.Gray,
+                    Y1 = - PlotView.y + yi * PlotView.scalefactor,
+                    Y2 = - PlotView.y + yi * PlotView.scalefactor,
+                    X1 = 0,
+                    X2 = PlotView.width
+                };
+                canvas.Children.Add(line);
+
+                TextBlock textBlock = new TextBlock()
+                {
+                    Text = yi.ToString(),
+                    Foreground = new SolidColorBrush(Colors.Red),
+                    Background = new SolidColorBrush(Colors.Black)
+                };
+                Canvas.SetTop(textBlock, line.Y1);
+                Canvas.SetBottom(textBlock, 0);
+                canvas.Children.Add(textBlock);
+            }
+
+
+            Line OX = new Line()
+            {
+                Stroke = Brushes.Red,
+                Y1 = -PlotView.y,
+                Y2 = -PlotView.y,
+                X1 = 0,
+                X2 = PlotView.width
+            };
+            Line OY = new Line()
+            {
+                Stroke = Brushes.Red,
+                X1 = -PlotView.x,
+                X2 = -PlotView.x,
+                Y1 = 0,
+                Y2 = PlotView.height
+            };
+
+            canvas.Children.Add(OX);
+            canvas.Children.Add(OY);
+            canvas.InvalidateVisual();
+        }
         private void DoublePreviewInput(object sender, TextCompositionEventArgs e)
         {
             string permitted = "0123456789+-.";
@@ -73,8 +168,7 @@ namespace WpfApp2
             PlotView.height = e.NewSize.Height;
             PlotView.width = e.NewSize.Width;
             if (e.PreviousSize.Width == 0 && e.PreviousSize.Height == 0) return;
-            //PlotView.x += (e.NewSize.Width - e.PreviousSize.Width) / 2;
-            //PlotView.y += (e.NewSize.Height - e.PreviousSize.Height) / 2;
+            RedrawCoords();
         }
 
         private void Canvas_PreviewTouchMove(object sender, TouchEventArgs e)
@@ -110,6 +204,7 @@ namespace WpfApp2
             DragBeginX = currMousePoint.X;
             DragBeginY = currMousePoint.Y;
             Replot.Command.Execute(Replot.CommandParameter);
+            RedrawCoords();
         }
 
         private void Canvas_MouseWheel(object sender, MouseWheelEventArgs e)
@@ -117,6 +212,7 @@ namespace WpfApp2
             if (PlotView.scalefactor + e.Delta / 10.0f < 0) return;
             PlotView.scalefactor += e.Delta / 10.0f;
             Replot.Command.Execute(Replot.CommandParameter);
+            RedrawCoords();
         }
 
         private void Canvas_KeyDown(object sender, KeyEventArgs e)
