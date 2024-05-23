@@ -38,7 +38,7 @@ namespace OptimizationMethods
             Point[] newSimplex = Point.Clone(nmConfig.startSimplex);
             Array.Sort(newSimplex, new ValueIncreasingComparer());
             //Мне непонятно зачем нужен симпдекс из этого же объекта
-            Point centrePoint = Centre(nmConfig.startSimplex);
+            Point centrePoint = Centre(newSimplex);
             Point reflectPoint = Reflection(newSimplex, centrePoint, nmConfig.alpha, nmConfig.exp);
             Point stretchPoint = null;
             Point compressPoint = null;
