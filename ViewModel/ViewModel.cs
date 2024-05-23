@@ -21,7 +21,7 @@ namespace OptimizationMethods
             get
             {
                 if (ResultIndex == -1) return "Not assigned";
-                string output = "";
+                string output = "Step " + ResultIndex + ": ";
                 for (int i = 0; i < result[ResultIndex].simplex.Length; i++)
                 {
                     output += "[ ";
@@ -91,7 +91,7 @@ namespace OptimizationMethods
                         p => true,
                         p => { ResultIndex--; });
                 }
-                ResultIndex--;
+                //ResultIndex--;
                 return left;
             }
         }
@@ -107,11 +107,28 @@ namespace OptimizationMethods
                         p => true,
                         p => { ResultIndex++; });
                 }
-                ResultIndex--;
+                //ResultIndex--;
                 return right;
             }
         }
 
+        ICommand? toTheEnd;
+        public ICommand ToTheEnd
+        {
+            get
+            {
+                if (toTheEnd == null)
+                {
+                    toTheEnd = new RelayCommand(
+                        p => true,
+                        p => { if (!(Result != null && Result.Count == 0)) ResultIndex = Result.Count - 1; });
+                }
+                //ResultIndex--;
+                return toTheEnd;
+            }
+
+        }
+           
         ICommand? replot;
         public ICommand Replot
         {
@@ -147,11 +164,14 @@ namespace OptimizationMethods
 
         public bool CanRun()
         {
-            return NewConfig.IsReadyToStart() && result.Count == 0;
+            return NewConfig.IsReadyToStart();
         }
 
         public void RunNelderMeade()
         {
+            NewConfig.startSimplex = NewConfig.GetByPoint(new(NewConfig.startPoint));
+            result.Clear();
+            resultIndex = -1;
             NelderMeade nelderMeade = new NelderMeade(NewConfig);
             Result = nelderMeade.Run(NewConfig);
             ResultIndex = 0;

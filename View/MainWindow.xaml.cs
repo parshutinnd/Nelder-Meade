@@ -40,16 +40,16 @@ namespace WpfApp2
                 if (i != 0) result_string += " ";
                 var X = configuration.simplex[i].coords[0] * scalefactor - x;
                 var Y = configuration.simplex[i].coords[1] * scalefactor - y;
-                result_string += (X).ToString() + ",";
-                result_string += (Y).ToString();
+                result_string += ((int)X).ToString() + ",";
+                result_string += ((int)Y).ToString();
             }
             {
                 int i = 0;
                 result_string += " ";
                 var X = configuration.simplex[i].coords[0] * scalefactor - x;
                 var Y = configuration.simplex[i].coords[1] * scalefactor - y;
-                result_string += (X).ToString() + ",";
-                result_string += (Y).ToString();
+                result_string += ((int)X).ToString() + ",";
+                result_string += ((int)Y).ToString();
             }
             return result_string;
         }

@@ -44,8 +44,20 @@
                 <TextBox Grid.Row="0" Text="{Binding ResultRepresentation, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                 <Button Grid.Row="2" Content="Left" HorizontalAlignment="Left" Command="{Binding Left, Mode=OneWay}"/>
                 <Button Name="Replot" Grid.Row="2" Content="Replot" HorizontalAlignment="Center" Command="{Binding Replot, Mode=OneWay}"/>
-                <Button Grid.Row="2" Content="Right" HorizontalAlignment="Right" Command="{Binding Right, Mode=OneWay}"/>
-                
+                <Grid Grid.Row="2" HorizontalAlignment="Right">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition>
+                        </ColumnDefinition>
+                        <ColumnDefinition>
+                        </ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20">
+                        </RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Column="1" Content="To the end" Command="{Binding ToTheEnd, Mode=OneWay}"/>
+                    <Button Grid.Column="0" Content="Right" Command="{Binding Right, Mode=OneWay}"/>
+                </Grid>
             </Grid>
             <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding NewConfig.Function, UpdateSourceTrigger=PropertyChanged}" AutomationProperties.HelpText="Start point" />
             <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding NewConfig.Start, UpdateSourceTrigger=Default}"/>
