@@ -21,6 +21,7 @@ namespace OptimizationMethods
             get
             {
                 if (ResultIndex == -1) return "Not assigned";
+                return resultString;
                 string output = "Step " + ResultIndex + ": ";
                 for (int i = 0; i < result[ResultIndex].simplex.Length; i++)
                 {
