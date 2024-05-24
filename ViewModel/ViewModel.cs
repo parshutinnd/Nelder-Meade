@@ -21,7 +21,6 @@ namespace OptimizationMethods
             get
             {
                 if (ResultIndex == -1) return "Not assigned";
-                return resultString;
                 string output = "Step " + ResultIndex + ": ";
                 for (int i = 0; i < result[ResultIndex].simplex.Length; i++)
                 {
@@ -170,6 +169,7 @@ namespace OptimizationMethods
 
         public void RunNelderMeade()
         {
+            
             NewConfig.startSimplex = NewConfig.GetByPoint(new(NewConfig.startPoint));
             result.Clear();
             resultIndex = -1;

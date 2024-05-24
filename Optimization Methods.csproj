@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Test\**" />
+    <EmbeddedResource Remove="Test\**" />
+    <None Remove="Test\**" />
+    <Page Remove="Test\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="FunctionParser\FunctionParser\FunctionParser.csproj" />
   </ItemGroup>
 
