@@ -4,7 +4,7 @@ using FunctionParser;
 
 namespace OptimizationMethods
 {
-    class NelderMeade //алгоритм с параметрами
+    public class NelderMeade //алгоритм с параметрами
     {
         NMconfig nmConfig;
         public NelderMeade(NMconfig nmconf)

@@ -27,6 +27,16 @@ namespace OptimizationMethods
             {
                 function = value;
                 exp = new Expression(function,ids,null) ;
+                n = 0;
+                while (function.Contains($"X{n + 1}"))
+                {
+                    n++;
+                }
+                ids = new string[n];
+                for (int i = 0; i < n; i++)
+                {
+                    ids[i] = $"X{i + 1}";
+                }
                 OnPropertyChanged("function");
             }
         }
